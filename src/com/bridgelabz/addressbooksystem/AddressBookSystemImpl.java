@@ -73,4 +73,17 @@ public class AddressBookSystemImpl implements AddressBookSystemIF {
 			System.err.println("Contact Not Found!");
 		}
 	}
+
+	@Override
+	public void deleteContacts(Contacts contacts) {
+		System.out.print("Enter the First Name of contact to be edited: ");
+		String firstName = scanner.nextLine();
+		if(firstName.equalsIgnoreCase(contacts.getFirstName())) {
+			contacts=null;
+			System.out.println("Contact Successfully Deleted");
+		}
+		else {
+			System.err.println("Contact Not Found!");
+		}
+	}
 }
