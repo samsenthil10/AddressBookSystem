@@ -1,15 +1,46 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.util.Scanner;
+
 public class AddressBookMain {
 
-	
+	public static Scanner scanner = new Scanner(System.in);
+
 	public static void main(String[] args) {
+
 
 		AddressBookSystemIF addressBookImpl = new AddressBookSystemImpl();
 		System.out.println("----------Welcome To Address Book Program----------");
-		Contacts contacts = new Contacts();
-		addressBookImpl.createContacts(contacts);
-		addressBookImpl.editContacts(contacts);
-		addressBookImpl.deleteContacts(contacts);
+		System.out.println();
+		System.out.print("Enter total number of contacts To be stored: ");
+		int totalNumberOfContacts = scanner.nextInt();
+		scanner.nextLine();
+		Contacts[] contacts = new Contacts[totalNumberOfContacts];
+		int contactTopPointer = -1;
+		while(true) {
+
+			System.out.print("\n1.Create a new contact\n2.Edit an existing contact\n3.Delete an existing contact\n4.Exit\nSelect your option: ");
+			int choice = scanner.nextInt();
+			scanner.nextLine();
+			switch(choice) {
+			case 1: if(contactTopPointer < totalNumberOfContacts-1) {
+				contactTopPointer++;
+				contacts[contactTopPointer] = new Contacts(); 
+				addressBookImpl.createContacts(contacts[contactTopPointer]);
+			}
+			else {
+				System.out.println("Address Book Full");
+			}
+			break;
+			case 2: addressBookImpl.editContacts(contacts, contactTopPointer, totalNumberOfContacts);
+			break;
+			case 3: contactTopPointer= addressBookImpl.deleteContacts(contacts, contactTopPointer, totalNumberOfContacts);
+			break;
+			case 4:scanner.close();
+			System.exit(1);
+			break;
+			default: System.err.println("Invalid Option!");
+			}
+		}
 	}
 }
