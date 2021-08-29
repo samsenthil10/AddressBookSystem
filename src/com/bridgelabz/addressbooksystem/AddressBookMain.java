@@ -10,5 +10,6 @@ public class AddressBookMain {
 		Contacts contacts = new Contacts();
 		addressBookImpl.createContacts(contacts);
 		addressBookImpl.editContacts(contacts);
+		addressBookImpl.deleteContacts(contacts);
 	}
 }
