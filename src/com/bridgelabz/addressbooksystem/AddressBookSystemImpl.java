@@ -112,4 +112,24 @@ public class AddressBookSystemImpl implements AddressBookSystemIF {
 		}
 		return contactTopPointer;
 	}
+	
+	@Override
+	public int createAddressBooks(String[] addressBooksNames, int addressBookcounter, int totalNumberOfAddressBooks) {
+		int flag = 0;
+		System.out.print("Enter Address Book Name: ");
+		String nameOfBook = AddressBookMain.scanner.nextLine();
+		for(int index =0; index <= addressBookcounter && addressBookcounter <= totalNumberOfAddressBooks;index++) {
+			if(nameOfBook.equalsIgnoreCase(addressBooksNames[index])) {
+				flag =1;
+			}
+		}
+		if (flag == 1) {
+			System.out.println("Name Already Exists!");
+		}
+		else {
+			addressBookcounter++;
+			addressBooksNames[addressBookcounter] = nameOfBook;
+		}
+		return addressBookcounter;
+	}
 }
